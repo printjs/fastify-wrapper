@@ -1,0 +1,147 @@
+{
+    "defaultSeverity": "error",
+    "extends": [
+        "tslint:recommended",
+        "tslint-microsoft-contrib/recommended"
+    ],
+    "linterOptions": {
+        "exclude": [
+            "**/*.d.ts"
+        ]
+    },
+    "jsRules": {},
+    "rules": {
+        "space-before-function-paren": [
+            true,
+            {
+                "anonymous": "always",
+                "named": "never",
+                "asyncArrow": "always"
+            }
+        ],
+        "no-function-expression": false,
+        "only-arrow-functions": false,
+        "no-typeof-undefined": false,
+        "radix": false,
+        "no-unused-variable": [
+            true,
+            {
+                "ignore-pattern": "^_"
+            }
+        ],
+        "no-unsafe-finally": true,
+        "no-unnecessary-initializer": true,
+        "function-name": false,
+        "ordered-imports": true,
+        "jsx-no-multiline-js": false,
+        "no-bitwise": false,
+        "no-debugger": false,
+        "object-literal-sort-keys": false,
+        "class-name": true,
+        "no-relative-imports": false,
+        "export-name": false,
+        "import-name": false,
+        "jsx-no-string-ref": false,
+        "jsx-boolean-value": [
+            "never"
+        ],
+        "linebreak-style": [
+            true,
+            "LF"
+        ],
+        "no-http-string": false,
+        "no-backbone-get-set-outside-model": false,
+        "react-this-binding-issue": [
+            true,
+            {
+                "allow-anonymous-listeners": true
+            }
+        ],
+        "comment-format": [
+            true,
+            "check-space"
+        ],
+        "indent": [
+            true,
+            "spaces",
+            4
+        ],
+        "no-unused-expression": true,
+        "no-duplicate-variable": true,
+        "no-eval": true,
+        "no-internal-module": false,
+        "no-trailing-whitespace": false,
+        "trailing-comma": false,
+        "no-var-keyword": true,
+        "no-var-requires": false,
+        "no-console": false,
+        "no-consecutive-blank-lines": false,
+        "one-variable-per-declaration": false,
+        "prefer-const": true,
+        "no-shadowed-variable": false,
+        "object-literal-shorthand": false,
+        "member-access": true,
+        "object-literal-key-quotes": false,
+        "max-func-body-length": 200,
+        "array-type": [
+            false,
+            "array-simple"
+        ],
+        "max-classes-per-file": true,
+        "max-file-line-count": [
+            true,
+            1000
+        ],
+        "max-line-length": [
+            true,
+            {
+                "limit": 120,
+                "ignore-pattern": "^import |^export {(.*?)}"
+            }
+        ],
+        "one-line": [
+            true,
+            "check-open-brace",
+            "check-whitespace"
+        ],
+        "quotemark": [
+            true,
+            "double"
+        ],
+        "semicolon": [
+            true
+        ],
+        "triple-equals": [
+            true,
+            "allow-null-check"
+        ],
+        "typedef-whitespace": [
+            true,
+            {
+                "call-signature": "nospace",
+                "index-signature": "nospace",
+                "parameter": "nospace",
+                "property-declaration": "nospace",
+                "variable-declaration": "nospace"
+            }
+        ],
+        "variable-name": [
+            true,
+            "ban-keywords",
+            "check-format",
+            "allow-leading-underscore",
+            "allow-pascal-case"
+        ],
+        "whitespace": [
+            true,
+            "check-branch",
+            "check-decl",
+            "check-operator",
+            "check-separator",
+            "check-type"
+        ]
+    },
+    "rulesDirectory": [
+        "node_modules/tslint-microsoft-contrib"
+    ]
+}
