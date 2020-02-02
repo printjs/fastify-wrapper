@@ -1,6 +1,6 @@
 {
   "name": "fastify-wrapper",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "description": "MVC fastify decorator Dependency injection Inversion of Control Typescript",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
