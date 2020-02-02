@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "MVC fastify decorator Dependency injection Inversion of Control Typescript",
   "main": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
   "repository": "git@github.com:printjs/fastify-wrapper.git",
   "author": "JianTao Wu",
   "license": "MIT",
