@@ -1,6 +1,6 @@
 {
   "name": "fastify-wrapper",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "MVC fastify decorator Dependency injection Inversion of Control Typescript",
   "main": "index.js",
   "repository": "git@github.com:printjs/fastify-wrapper.git",
@@ -8,7 +8,9 @@
   "license": "MIT",
   "scripts": {
     "server": "node_modules/.bin/ts-node example/test.ts",
-    "debug": "node_modules/.bin/ts-node --inspect=0.0.0.0:9224 example/test.ts"
+    "debug": "node_modules/.bin/ts-node --inspect=0.0.0.0:9224 example/test.ts",
+    "build":"node_modules/.bin/tsc -d",
+    "publish": ""
   },
   "devDependencies": {
     "fastify": "^2.11.0",

@@ -1,12 +1,12 @@
-import "reflect-metadata";
 import { DecoratorKey } from "../constant/decorator.key";
+import { defineMetadata } from "../tool/reflect";
 
 export function SetMetadata(key: string, meta: any) {
     return function (target: any, propertyKey?: string) {
         if (propertyKey) {
-            Reflect.defineMetadata(DecoratorKey.Metadata, meta, target, propertyKey);
+            defineMetadata(DecoratorKey.Metadata, meta, target, propertyKey);
         } else {
-            Reflect.defineMetadata(DecoratorKey.Metadata, meta, target);
+            defineMetadata(DecoratorKey.Metadata, meta, target);
         }
     };
 }
@@ -14,7 +14,7 @@ export function SetMetadata(key: string, meta: any) {
 export function GetMetadata(key: string) {
     return function (target: any, propertyKey?: string) {
         if (propertyKey) {
-            // return Reflect.getMetadata()
+            // return getMetadata()
         }
     };
 }

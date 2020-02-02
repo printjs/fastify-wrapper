@@ -1,9 +1,10 @@
 import { DecoratorKey } from "../constant/decorator.key";
 import { RouteModel } from "../model/route.model";
+import { getMetadata } from "../tool/reflect";
 
 export class RouteConfigInject {
     public prefixTrailingSlash(controller: new (...args: []) => {}, functionName: string, result: RouteModel) {
-        const metadata = Reflect.getMetadata(DecoratorKey.PrefixTrailingSlash, controller.prototype);
+        const metadata = getMetadata(DecoratorKey.PrefixTrailingSlash, controller.prototype);
         if (metadata && metadata.level === "class") {
             result.prefixTrailingSlash = metadata.value;
         } else if (
@@ -17,7 +18,7 @@ export class RouteConfigInject {
     }
 
     public bodyLimit(controller: new (...args: []) => {}, functionName: string, result: RouteModel) {
-        const metadata = Reflect.getMetadata(DecoratorKey.BodyLimit, controller.prototype);
+        const metadata = getMetadata(DecoratorKey.BodyLimit, controller.prototype);
         if (metadata && metadata.level === "class") {
             result.bodyLimit = metadata.value;
         } else if (
@@ -31,7 +32,7 @@ export class RouteConfigInject {
     }
 
     public logLevel(controller: new (...args: []) => {}, functionName: string, result: RouteModel) {
-        const metadata = Reflect.getMetadata(DecoratorKey.LogLevel, controller.prototype);
+        const metadata = getMetadata(DecoratorKey.LogLevel, controller.prototype);
         if (metadata && metadata.level === "class") {
             result.logLevel = metadata.value;
         } else if (
@@ -45,7 +46,7 @@ export class RouteConfigInject {
     }
 
     public version(controller: new (...args: []) => {}, functionName: string, result: RouteModel) {
-        const metadata = Reflect.getMetadata(DecoratorKey.Version, controller.prototype);
+        const metadata = getMetadata(DecoratorKey.Version, controller.prototype);
         if (metadata && metadata.level === "class") {
             result.version = metadata.value;
         } else if (
@@ -59,7 +60,7 @@ export class RouteConfigInject {
     }
 
     public config(controller: new (...args: []) => {}, functionName: string, result: RouteModel) {
-        const metadata = Reflect.getMetadata(DecoratorKey.Config, controller.prototype);
+        const metadata = getMetadata(DecoratorKey.Config, controller.prototype);
         if (metadata && metadata.level === "class") {
             result.config = metadata.value;
         } else if (

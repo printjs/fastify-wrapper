@@ -1,9 +1,10 @@
 import { WidgetKey } from "../constant/widget.key";
 import { RouteModel } from "../model/route.model";
+import { getMetadata } from "../tool/reflect";
 
 export class WidgetInject {
     public guardWidget(controller: new (...args: []) => {}, functionName: string, result: RouteModel) {
-        const metadata = Reflect.getMetadata(WidgetKey.Guard, controller.prototype);
+        const metadata = getMetadata(WidgetKey.Guard, controller.prototype);
         if (metadata && metadata.level === "class") {
             result.preValidation = metadata.fn;
         } else if (
@@ -17,7 +18,7 @@ export class WidgetInject {
     }
 
     public preHandlerWidget(controller: new (...args: []) => {}, functionName: string, result: RouteModel) {
-        const metadata = Reflect.getMetadata(WidgetKey.PreHandler, controller.prototype);
+        const metadata = getMetadata(WidgetKey.PreHandler, controller.prototype);
         if (metadata && metadata.level === "class") {
             result.preHandler = metadata.fn;
         } else if (
@@ -31,7 +32,7 @@ export class WidgetInject {
     }
 
     public onRequestWidget(controller: new (...args: []) => {}, functionName: string, result: RouteModel) {
-        const metadata = Reflect.getMetadata(WidgetKey.OnRequest, controller.prototype);
+        const metadata = getMetadata(WidgetKey.OnRequest, controller.prototype);
         if (metadata && metadata.level === "class") {
             result.onRequest = metadata.fn;
         } else if (
@@ -45,7 +46,7 @@ export class WidgetInject {
     }
 
     public preParsingWidget(controller: new (...args: []) => {}, functionName: string, result: RouteModel) {
-        const metadata = Reflect.getMetadata(WidgetKey.PreParsing, controller.prototype);
+        const metadata = getMetadata(WidgetKey.PreParsing, controller.prototype);
         if (metadata && metadata.level === "class") {
             result.preParsing = metadata.fn;
         } else if (
@@ -59,7 +60,7 @@ export class WidgetInject {
     }
 
     public preSerializationWidget(controller: new (...args: []) => {}, functionName: string, result: RouteModel) {
-        const metadata = Reflect.getMetadata(WidgetKey.PreSerialization, controller.prototype);
+        const metadata = getMetadata(WidgetKey.PreSerialization, controller.prototype);
         if (metadata && metadata.level === "class") {
             result.preSerialization = metadata.fn;
         } else if (
@@ -73,7 +74,7 @@ export class WidgetInject {
     }
 
     public onSendWidget(controller: new (...args: []) => {}, functionName: string, result: RouteModel) {
-        const metadata = Reflect.getMetadata(WidgetKey.OnSend, controller.prototype);
+        const metadata = getMetadata(WidgetKey.OnSend, controller.prototype);
         if (metadata && metadata.level === "class") {
             result.onSend = metadata.fn;
         } else if (
@@ -87,7 +88,7 @@ export class WidgetInject {
     }
 
     public onResponseWidget(controller: new (...args: []) => {}, functionName: string, result: RouteModel) {
-        const metadata = Reflect.getMetadata(WidgetKey.OnResponse, controller.prototype);
+        const metadata = getMetadata(WidgetKey.OnResponse, controller.prototype);
         if (metadata && metadata.level === "class") {
             result.onResponse = metadata.fn;
         } else if (

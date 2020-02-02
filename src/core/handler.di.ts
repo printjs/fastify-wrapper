@@ -2,6 +2,7 @@ import { DecoratorKey } from "../constant/decorator.key";
 import { WidgetKey } from "../constant/widget.key";
 import { HttpMethodsModel } from "../model/http.methods.model";
 import { RouteModel } from "../model/route.model";
+import { getMetadata, getOwnMetadata, ownKeys } from "../tool/reflect";
 import { ToolService } from "../tool/tool.service";
 import { RouteConfigInject } from "./route.config.inject";
 import { WidgetInject } from "./widget.inject";
@@ -10,15 +11,15 @@ const tool = new ToolService();
 
 export class HandlerDI {
     public injectService(injectable: (new (...args: any[]) => any)): (new (...args: any[]) => any)[] {
-        const params: (new (...args: any[]) => any)[] = Reflect.getMetadata(
+        const params: (new (...args: any[]) => any)[] = getMetadata(
             DecoratorKey.ParamTypes,
             injectable
         );
         if (params && params.length > 0) {
             return params.map((param) => {
-                if (Reflect.getMetadata(DecoratorKey.Service, param)) {
+                if (getMetadata(DecoratorKey.Service, param)) {
                     return new param(...this.injectService(param));
-                } else if (Reflect.getMetadata(DecoratorKey.Inject, param)) {
+                } else if (getMetadata(DecoratorKey.Inject, param)) {
                     return new param(...this.injectService(param));
                 } else {
                     return null;
@@ -29,7 +30,7 @@ export class HandlerDI {
     }
 
     public handlerController(controller: new (...args: []) => {}): RouteModel[] {
-        return Reflect.ownKeys(controller.prototype)
+        return ownKeys(controller.prototype)
             .filter((functionName) => functionName !== "constructor")
             .map((functionName) => {
                 const httpHandlers: string[] = [
@@ -43,7 +44,7 @@ export class HandlerDI {
                 ];
                 let result!: RouteModel;
                 httpHandlers.map((method) => {
-                    const item = Reflect.getOwnMetadata(
+                    const item = getOwnMetadata(
                         method,
                         controller.prototype,
                         tool.TypeAssertion<string>(functionName)
@@ -51,7 +52,7 @@ export class HandlerDI {
                     if (item) {
                         result = {
                             ...new HttpMethodsModel(item),
-                            schema: Reflect.getOwnMetadata(
+                            schema: getOwnMetadata(
                                 WidgetKey.Schema,
                                 controller.prototype,
                                 tool.TypeAssertion<string>(functionName)

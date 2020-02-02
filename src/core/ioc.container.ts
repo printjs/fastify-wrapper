@@ -5,10 +5,11 @@ import {
     RouteOptions,
 } from "fastify";
 import { ServerResponse } from "http";
-import "reflect-metadata";
 import { DecoratorKey } from "../constant/decorator.key";
 import { RouteModel } from "../model/route.model";
 import { FastifyGuard } from "../template/guard";
+import { FastifyPreSerialization } from "../template/preSerialization";
+import { getMetadata } from "../tool/reflect";
 import { ToolService } from "../tool/tool.service";
 import { HandlerDI } from "./handler.di";
 
@@ -24,7 +25,7 @@ export class IocContainer {
             const controllerParams = service.injectService(controller);
             const route = service.handlerController(controller);
             return {
-                controllerPath: tool.TypeAssertion<string>(Reflect.getMetadata(DecoratorKey.Controller, controller)),
+                controllerPath: tool.TypeAssertion<string>(getMetadata(DecoratorKey.Controller, controller)),
                 instance: new controller(...controllerParams),
                 route,
             };
@@ -34,6 +35,12 @@ export class IocContainer {
     public deployGuard(fastify: FastifyInstance, guards: FastifyGuard[]) {
         guards.map((guard) => {
             fastify.addHook("preValidation", guard.preValidation);
+        });
+    }
+
+    public deployResponseInterceptor(fastify: FastifyInstance, interceptors: FastifyPreSerialization[]) {
+        interceptors.map((interceptor) => {
+            fastify.addHook("preSerialization", interceptor.preSerialization);
         });
     }
 
@@ -92,19 +99,19 @@ export class IocContainer {
     private handler(request: FastifyRequest, reply: FastifyReply<ServerResponse>) {
         return (instance: any, handler: (...args: any[]) => any) => {
             const queue: IQueue[] = [{
-                array: Reflect.getMetadata(DecoratorKey.Query, instance, handler.name),
+                array: getMetadata(DecoratorKey.Query, instance, handler.name),
                 type: "Query",
             }, {
-                array: Reflect.getMetadata(DecoratorKey.Body, instance, handler.name),
+                array: getMetadata(DecoratorKey.Body, instance, handler.name),
                 type: "Body",
             }, {
-                array: Reflect.getMetadata(DecoratorKey.Param, instance, handler.name),
+                array: getMetadata(DecoratorKey.Param, instance, handler.name),
                 type: "Param",
             }, {
-                array: Reflect.getMetadata(DecoratorKey.Request, instance, handler.name),
+                array: getMetadata(DecoratorKey.Request, instance, handler.name),
                 type: "Request",
             }, {
-                array: Reflect.getMetadata(DecoratorKey.Reply, instance, handler.name),
+                array: getMetadata(DecoratorKey.Reply, instance, handler.name),
                 type: "Reply",
             }];
 
@@ -139,7 +146,6 @@ export class IocContainer {
                 payload.sort((prev, next) => prev.index - next.index);
                 return payload.map((item) => item.value);
             }
-            console.log(instance);
             return handler.apply(instance, getFunctionParams());
         };
     }

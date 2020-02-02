@@ -1,9 +1,6 @@
-import "reflect-metadata";
 import { DecoratorKey } from "../constant/decorator.key";
+import { defineMetadata } from "../tool/reflect";
 
 export function Injectable<T extends new(...args: any[]) => {}>(target: T) {
-    console.log("Injectable:Start");
-    console.log(target);
-    console.log("Injectable:end");
-    Reflect.defineMetadata(DecoratorKey.Service, target, target);
+    defineMetadata(DecoratorKey.Service, target, target);
 }

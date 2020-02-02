@@ -9,12 +9,14 @@ export class GlobalGuard extends FastifyGuard {
 
 export class Guard extends FastifyGuard {
     public preValidation(reqeust: any, reply: any, done: any) {
+        console.log("good1");
         done();
     }
 }
 
 export class Guard1 extends FastifyGuard {
     public preValidation(reqeust: any, reply: any, done: any) {
-        done(new TypeError());
+        console.log("good2");
+        done();
     }
 }

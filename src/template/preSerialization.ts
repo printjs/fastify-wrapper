@@ -6,6 +6,6 @@ export abstract class FastifyPreSerialization {
         request: FastifyRequest,
         reply: FastifyReply<ServerResponse>,
         payload: any,
-        done: (err?: Error) => void,
+        done: (err?: Error, value?: any) => void,
     ): void;
 }

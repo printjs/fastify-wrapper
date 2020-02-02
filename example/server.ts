@@ -2,7 +2,7 @@ import Fastify from "fastify";
 
 const fastify = Fastify({ logger: true });
 fastify.route({
-    method: "GET",
+    method: "POST",
     url: "/123/123",
     schema: {
         // request needs to have a querystring with a `name` parameter
@@ -62,6 +62,22 @@ fastify.addHook("preValidation", (request, reply, done) => {
 fastify.addHook("preValidation", (request, reply, done) => {
     console.log("come in 000000001");
     done();
+});
+
+fastify.addHook("preHandler", (request, reply, done) => {
+    console.log(request);
+    done();
+});
+
+fastify.addHook("preSerialization", (request, reply, payload, done) => {
+    console.log(payload);
+    done(undefined, { res: payload });
+});
+
+
+fastify.addHook("onError", (request, reply, error) => {
+    // console.log(request);
+    // done();
 });
 
 // fastify.addHook("onSend", (request, reply, payload, done) => {

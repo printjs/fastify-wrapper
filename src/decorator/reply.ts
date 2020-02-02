@@ -1,14 +1,14 @@
-import "reflect-metadata";
 import { DecoratorKey } from "../constant/decorator.key";
+import { defineMetadata, getMetadata } from "../tool/reflect";
 
 export function Reply() {
     return function (target: any, propertyKey: string, index: number) {
-        const prev = Reflect.getMetadata(DecoratorKey.Reply, target, propertyKey);
+        const prev = getMetadata(DecoratorKey.Reply, target, propertyKey);
         if (prev) {
             prev.push({ index });
-            return Reflect.defineMetadata(DecoratorKey.Reply, prev, target, propertyKey);
+            return defineMetadata(DecoratorKey.Reply, prev, target, propertyKey);
         }
-        return Reflect.defineMetadata(DecoratorKey.Reply, [{ index }], target, propertyKey);
+        return defineMetadata(DecoratorKey.Reply, [{ index }], target, propertyKey);
     };
 }
 

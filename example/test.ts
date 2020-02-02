@@ -1,5 +1,6 @@
 import Fastify, { FastifyReply, FastifyRequest } from "fastify";
 import { ServerResponse } from "http";
+import { FastifyContainer } from "../src/core/fastify.container";
 import { Controller } from "../src/decorator/controller";
 import { Get } from "../src/decorator/get";
 import { Injectable } from "../src/decorator/injectable";
@@ -7,10 +8,10 @@ import { Post } from "../src/decorator/post";
 import { Query } from "../src/decorator/query";
 import { Reply } from "../src/decorator/reply";
 import { Request } from "../src/decorator/request";
-import { FastifyContainer } from "../src/ioc/fastify.container";
 import { GuardWidget } from "../src/widgets/guard.widget";
 import { SchemaWidget } from "../src/widgets/schema.widget";
 import { GlobalGuard, Guard, Guard1 } from "./guard";
+import { ResInterceptor } from "./res";
 
 const fastify = Fastify({ logger: true });
 
@@ -63,7 +64,11 @@ class Test {
         @Query() query: any,
         @Query("ok") q1: any,
     ) {
-        return `${q1},${this.testService.ok()}`;
+        return {
+            query,
+            q1,
+            ok: this.testService.ok()
+        };
     }
 
     @Get("/reply")
@@ -87,6 +92,7 @@ FastifyContainer({
     fastify,
     controllers: [Test],
     useGlobalGuard: [new GlobalGuard()],
+    useGlobalResponseInterceptor: [new ResInterceptor()],
 });
 fastify.addContentTypeParser("application/x-www-form-urlencoded", (req, done) => {
     done(null, req);
