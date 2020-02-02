@@ -43,10 +43,7 @@ class HandlerDI {
             httpHandlers.map((method) => {
                 const item = reflect_1.getOwnMetadata(method, controller.prototype, tool.TypeAssertion(functionName));
                 if (item) {
-                    result = {
-                        ...new http_methods_model_1.HttpMethodsModel(item),
-                        schema: reflect_1.getOwnMetadata(widget_key_1.WidgetKey.Schema, controller.prototype, tool.TypeAssertion(functionName)),
-                    };
+                    result = Object.assign(Object.assign({}, new http_methods_model_1.HttpMethodsModel(item)), { schema: reflect_1.getOwnMetadata(widget_key_1.WidgetKey.Schema, controller.prototype, tool.TypeAssertion(functionName)) });
                     const widget = new widget_inject_1.WidgetInject();
                     result = widget.guardWidget(controller, tool.TypeAssertion(functionName), result);
                     result = widget.preHandlerWidget(controller, tool.TypeAssertion(functionName), result);
