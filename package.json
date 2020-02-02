@@ -10,7 +10,7 @@
     "server": "node_modules/.bin/ts-node example/test.ts",
     "debug": "node_modules/.bin/ts-node --inspect=0.0.0.0:9224 example/test.ts",
     "build":"node_modules/.bin/tsc -d",
-    "publish": "npm run build"
+    "prepublish": "npm run build"
   },
   "devDependencies": {
     "fastify": "^2.11.0",
