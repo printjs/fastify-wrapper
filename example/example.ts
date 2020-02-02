@@ -16,64 +16,66 @@ import { ResInterceptor } from "./res";
 const fastify = Fastify({ logger: true });
 
 @Injectable
-export class Test2Service {
-    public vala: string = "1";
+class AnimalService {
+    public animal: string = "The animal";
 }
 
 @Injectable
-export class TestService {
+class CatService {
     constructor(
-        private readonly test2: Test2Service,
+        private readonly animalService: AnimalService,
     ) { }
-    public ok() { return this.test2.vala; }
+    public getType() { return `${this.animalService.animal} is red cat.`; }
 }
 
 
 @Injectable
-class Nothing {
+class DogService {
     constructor(
-        private readonly a: TestService,
-        // private readonly b: Test1Service,
+        private readonly animalService: AnimalService,
     ) { }
-    public ok() { return this.a.ok(); }
-    // public test1() { console.log(this.b); }
+    public getType() { return `${this.animalService.animal} is black dog.`; }
 }
 
-// forwardRef(() => Nothing)
 @Injectable
-export class Test1Service {
+export class ZoomService {
     constructor(
-        // @Inject(Nothing)
-        private readonly nothing: Nothing,
+        private readonly catService: CatService,
+        private readonly dogService: DogService,
     ) { }
-    public test1() { return this.nothing.ok(); }
+    public getDog() {
+        return this.dogService.getType();
+    }
+    public getCat() {
+        return this.catService.getType();
+    }
 }
 
 
-@Controller("test")
-class Test {
+@Controller()
+class ApplicationController {
     constructor(
-        private readonly testService: TestService,
-        private readonly nothing: Nothing,
+        private readonly zoomService: ZoomService,
+        private readonly animalService: AnimalService,
     ) { }
 
-    @Get("/test")
+    @Get("/name")
     @SchemaWidget({ querystring: { name: { type: "string" } } })
     @GuardWidget(new Guard(), new Guard1())
-    public async aaa(
+    public async function1(
         @Query() query: any,
-        @Query("ok") q1: any,
+        @Query("name") name: any,
     ) {
         return {
             query,
-            q1,
-            ok: this.testService.ok()
+            name,
+            message: `${this.animalService.animal} is ${name}`,
         };
     }
 
     @Get("/reply")
     public reply(@Request() request: FastifyRequest, @Reply() reply: FastifyReply<ServerResponse>) {
-        reply.send("reply");
+        reply.send(this.zoomService.getDog());
     }
 
     @Post()
@@ -81,18 +83,21 @@ class Test {
         body: {
             name: { type: "string" },
             required: ["name"],
-        }
+        },
     })
-    public async yy() {
-        return this.nothing.ok();
+    public async formatResponse() {
+        return {
+            type: this.zoomService.getCat(),
+        };
     }
 }
 
 FastifyContainer({
     fastify,
-    controllers: [Test],
+    controllers: [ApplicationController],
     useGlobalGuard: [new GlobalGuard()],
     useGlobalResponseInterceptor: [new ResInterceptor()],
+    baseUrl: "/app",
 });
 fastify.addContentTypeParser("application/x-www-form-urlencoded", (req, done) => {
     done(null, req);
