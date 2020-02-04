@@ -5,7 +5,7 @@
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
   "repository": "git@github.com:printjs/fastify-wrapper.git",
-  "author": "Jiantao Wu",
+  "author": "Jiantao Wu <wujiantaocoder@gmail.com>",
   "license": "MIT",
   "scripts": {
     "server": "node_modules/.bin/ts-node example/test.ts",
