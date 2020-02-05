@@ -40,7 +40,7 @@
     "*.ts": [
       "node_modules/.bin/tslint --fix",
       "git add",
-      "node_modules/.bin/tslint -p tsconfig.json -c tslint.json --exclude '**/*.d.ts'"
+      "node_modules/.bin/tslint -p tsconfig.git.json -c tslint.json --exclude '**/*.d.ts'"
     ]
   },
   "ava": {
