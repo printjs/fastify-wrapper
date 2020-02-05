@@ -1,6 +1,6 @@
 {
   "name": "fastify-wrapper",
-  "version": "0.4.0",
+  "version": "1.0.0",
   "description": "MVC fastify decorator Dependency injection Inversion of Control Typescript",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
@@ -8,15 +8,21 @@
   "author": "Jiantao Wu <wujiantaocoder@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "test": "node_modules/.bin/ts-node node_modules/.bin/ava ",
+    "coverage": "node_modules/.bin/nyc --reporter=html npm run test",
     "server": "node_modules/.bin/ts-node example/test.ts",
     "debug": "node_modules/.bin/ts-node --inspect=0.0.0.0:9224 example/test.ts",
-    "build":"node_modules/.bin/tsc -d",
-    "prepublish": "npm run build"
+    "build": "node_modules/.bin/tsc -d",
+    "prepublish": "rm -rf ./dist && npm run coverage && npm run build"
   },
   "devDependencies": {
+    "@istanbuljs/nyc-config-typescript": "^1.0.1",
+    "ava": "^3.2.0",
     "fastify": "^2.11.0",
     "husky": "^4.0.6",
     "lint-staged": "^9.5.0",
+    "nyc": "^15.0.0",
+    "source-map-support": "^0.5.16",
     "ts-node": "^8.6.1",
     "tslint": "^5.20.1",
     "tslint-microsoft-contrib": "^6.2.0",
@@ -36,5 +42,38 @@
       "git add",
       "node_modules/.bin/tslint -p tsconfig.json -c tslint.json --exclude '**/*.d.ts'"
     ]
+  },
+  "ava": {
+    "files": [
+      "test/**/*.spec.ts"
+    ],
+    "tap": true,
+    "verbose": true,
+    "extensions": [
+      "ts"
+    ],
+    "failWithoutAssertions": true
+  },
+  "nyc": {
+    "extends": "@istanbuljs/nyc-config-typescript",
+    "all": true,
+    "check-coverage": true,
+    "include": [
+      "src/**/*.ts"
+    ],
+    "exclude": [
+      "**/*.spec.ts"
+    ],
+    "watermarks": {
+      "lines": [
+        30,
+        40
+      ],
+      "statements": [
+        30,
+        40
+      ]
+    },
+    "lines": 40
   }
 }
