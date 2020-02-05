@@ -31,6 +31,9 @@
   "dependencies": {
     "reflect-metadata": "^0.1.13"
   },
+  "files": [
+    "dist"
+  ],
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
