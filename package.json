@@ -13,7 +13,8 @@
     "server": "node_modules/.bin/ts-node example/test.ts",
     "debug": "node_modules/.bin/ts-node --inspect=0.0.0.0:9224 example/test.ts",
     "build": "node_modules/.bin/tsc -d",
-    "prepublish": "rm -rf ./dist && npm run coverage && npm run build"
+    "rm:dist": "node_modules/.bin/ts-node scripts/rm.dist.ts",
+    "prepublish": "npm run rm:dist && npm run coverage && npm run build"
   },
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
