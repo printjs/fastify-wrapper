@@ -5,10 +5,14 @@ import { defineMetadata } from "../tool/reflect";
 
 export function GuardWidget<T extends FastifyGuard>(...guards: T[]) {
     return function (target: any, propertyKey?: string, descriptor?: PropertyDescriptor) {
-        defineMetadata(WidgetKey.Guard, new ProcessModel({
-            level: propertyKey && descriptor ? "function" : "class",
-            fn: guards.map((item) => item.preValidation),
-            functionName: propertyKey,
-        }), target);
+        if (propertyKey && descriptor) {
+            defineMetadata(WidgetKey.Guard, new ProcessModel({
+                fn: guards.map((item) => item.preValidation),
+            }), target, propertyKey);
+        } else {
+            defineMetadata(WidgetKey.Guard, new ProcessModel({
+                fn: guards.map((item) => item.preValidation),
+            }), target);
+        }
     };
 }

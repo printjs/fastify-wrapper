@@ -50,9 +50,11 @@ export class IocContainer {
                 const urls = [item.path];
                 urls.unshift(router.controllerPath);
                 urls.unshift(baseUrl);
+                const url = tool.spliceUrl(urls);
+                console.log(`${url} has loaded`);
                 const options: RouteOptions = {
                     method: item.method,
-                    url: tool.spliceUrl(urls),
+                    url,
                     handler: (request, reply) => this.handler(request, reply)(router.instance, item.handler),
                 };
                 if (item.schema) {
@@ -115,6 +117,8 @@ export class IocContainer {
                 type: "Reply",
             }];
 
+            let isAsync: boolean = true;
+
             function getFunctionParams(): any[] {
                 const payload: IQueryBodyParam[] = [];
                 function transKey(type: FunctionParamsType) {
@@ -132,6 +136,9 @@ export class IocContainer {
                     }
                 }
                 queue.map((item) => {
+                    if (item.type === "Reply" || item.type === "Request") {
+                        isAsync = false;
+                    }
                     if (typeof item.array !== "undefined") {
                         item.array.map((obj) => {
                             const { key, index } = obj;
@@ -146,7 +153,12 @@ export class IocContainer {
                 payload.sort((prev, next) => prev.index - next.index);
                 return payload.map((item) => item.value);
             }
-            return handler.apply(instance, getFunctionParams());
+
+            return isAsync
+                ? new Promise((resolve) => {
+                    resolve(handler.apply(instance, getFunctionParams()));
+                })
+                : handler.apply(instance, getFunctionParams());
         };
     }
 }

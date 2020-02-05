@@ -27,7 +27,7 @@ export {
     OnSendWidget,
     PreHandlerWidget,
     PreParsingWidget,
-    preSerializationWidget,
+    PreSerializationWidget,
     SchemaWidget,
 } from "./widgets";
 

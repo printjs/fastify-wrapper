@@ -4,10 +4,14 @@ import { defineMetadata } from "../tool/reflect";
 
 export function BodyLimit(value: number) {
     return function (target: any, propertyKey?: string, descriptor?: PropertyDescriptor) {
-        defineMetadata(DecoratorKey.BodyLimit, new RouteConfigModel({
-            level: propertyKey && descriptor ? "function" : "class",
-            value,
-            functionName: propertyKey,
-        }), target);
+        if (propertyKey && descriptor) {
+            defineMetadata(DecoratorKey.BodyLimit, new RouteConfigModel({
+                value,
+            }), target, propertyKey);
+        } else {
+            defineMetadata(DecoratorKey.BodyLimit, new RouteConfigModel({
+                value,
+            }), target);
+        }
     };
 }

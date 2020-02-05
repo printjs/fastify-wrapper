@@ -17,6 +17,9 @@ export class ToolService {
     }
 
     public spliceUrl(urls: string[]) {
-        return `/${urls.join("")}`.replace(/\/+/g, "/");
+        if (/\/$/.test(urls[urls.length - 1])) {
+            return `/${urls.join("/")}`.replace(/\/+/g, "/");
+        }
+        return `/${urls.join("/")}`.replace(/\/+/g, "/").replace(/\/$/, "");
     }
 }

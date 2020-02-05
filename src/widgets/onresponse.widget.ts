@@ -5,10 +5,14 @@ import { defineMetadata } from "../tool/reflect";
 
 export function OnResponseWidget<T extends FastifyOnResponse>(...fns: T[]) {
     return function (target: any, propertyKey?: string, descriptor?: PropertyDescriptor) {
-        defineMetadata(WidgetKey.OnResponse, new ProcessModel({
-            level: propertyKey && descriptor ? "function" : "class",
-            fn: fns.map((item) => item.onResponse),
-            functionName: propertyKey,
-        }), target);
+        if (propertyKey && descriptor) {
+            defineMetadata(WidgetKey.OnResponse, new ProcessModel({
+                fn: fns.map((item) => item.onResponse),
+            }), target, propertyKey);
+        } else {
+            defineMetadata(WidgetKey.OnResponse, new ProcessModel({
+                fn: fns.map((item) => item.onResponse),
+            }), target);
+        }
     };
 }

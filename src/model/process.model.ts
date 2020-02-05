@@ -4,16 +4,10 @@ import { ServerResponse } from "http";
 
 export class ProcessModel {
     public fn!: PreFunction | AfterFunction[];
-    public level!: "class" | "function";
-    public functionName?: string;
 
     constructor(payload: ProcessModel) {
-        const { fn, level, functionName } = payload;
+        const { fn } = payload;
         this.fn = fn;
-        this.level = level;
-        if (functionName) {
-            this.functionName = functionName;
-        }
     }
 }
 

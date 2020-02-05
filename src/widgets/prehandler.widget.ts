@@ -5,10 +5,14 @@ import { defineMetadata } from "../tool/reflect";
 
 export function PreHandlerWidget<T extends FastifyPreHandler>(...preHandlers: T[]) {
     return function (target: any, propertyKey?: string, descriptor?: PropertyDescriptor) {
-        defineMetadata(WidgetKey.PreHandler, new ProcessModel({
-            level: propertyKey && descriptor ? "function" : "class",
-            fn: preHandlers.map((item) => item.preHandler),
-            functionName: propertyKey,
-        }), target);
+        if (propertyKey && descriptor) {
+            defineMetadata(WidgetKey.PreHandler, new ProcessModel({
+                fn: preHandlers.map((item) => item.preHandler),
+            }), target, propertyKey);
+        } else {
+            defineMetadata(WidgetKey.PreHandler, new ProcessModel({
+                fn: preHandlers.map((item) => item.preHandler),
+            }), target);
+        }
     };
 }

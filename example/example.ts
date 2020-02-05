@@ -61,7 +61,7 @@ class ApplicationController {
 
     @Get("/name")
     @SchemaWidget({ querystring: { name: { type: "string" } } })
-    @GuardWidget(new Guard(), new Guard1())
+    @GuardWidget(new Guard())
     public async function1(
         @Query() query: any,
         @Query("name") name: any,
@@ -74,6 +74,7 @@ class ApplicationController {
     }
 
     @Get("/reply")
+    @GuardWidget(new Guard1())
     public reply(@Request() request: FastifyRequest, @Reply() reply: FastifyReply<ServerResponse>) {
         reply.send(this.zoomService.getDog());
     }

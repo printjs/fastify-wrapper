@@ -4,10 +4,14 @@ import { defineMetadata } from "../tool/reflect";
 
 export function LogLevel(value: string) {
     return function (target: any, propertyKey?: string, descriptor?: PropertyDescriptor) {
-        defineMetadata(DecoratorKey.LogLevel, new RouteConfigModel({
-            level: propertyKey && descriptor ? "function" : "class",
-            value,
-            functionName: propertyKey,
-        }), target);
+        if (propertyKey && descriptor) {
+            defineMetadata(DecoratorKey.LogLevel, new RouteConfigModel({
+                value,
+            }), target, propertyKey);
+        } else {
+            defineMetadata(DecoratorKey.LogLevel, new RouteConfigModel({
+                value,
+            }), target);
+        }
     };
 }
