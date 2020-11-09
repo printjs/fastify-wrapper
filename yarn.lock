@@ -1022,8 +1022,8 @@ execa@^2.0.3:
 
 fast-decode-uri-component@^1.0.0:
   version "1.0.1"
-  resolved "https://registry.npm.taobao.org/fast-decode-uri-component/download/fast-decode-uri-component-1.0.1.tgz#46f8b6c22b30ff7a81357d4f59abfae938202543"
-  integrity sha1-Rvi2wisw/3qBNX1PWav66TggJUM=
+  resolved "https://registry.yarnpkg.com/fast-decode-uri-component/-/fast-decode-uri-component-1.0.1.tgz#46f8b6c22b30ff7a81357d4f59abfae938202543"
+  integrity sha512-WKgKWg5eUxvRZGwW8FvfbaH7AXSh2cL+3j5fMGzUMCxWBJ3dV3a7Wz8y2f/uQ0e3B6WmodD3oS54jTQ9HVTIIg==
 
 fast-deep-equal@^2.0.1:
   version "2.0.1"
@@ -1135,9 +1135,9 @@ find-cache-dir@^3.2.0:
     pkg-dir "^4.1.0"
 
 find-my-way@^2.2.0:
-  version "2.2.1"
-  resolved "https://registry.npm.taobao.org/find-my-way/download/find-my-way-2.2.1.tgz#248e939243af1b9df368bcc9b8c8286306caae7d"
-  integrity sha1-JI6TkkOvG53zaLzJuMgoYwbKrn0=
+  version "2.2.5"
+  resolved "https://registry.yarnpkg.com/find-my-way/-/find-my-way-2.2.5.tgz#86ce825266fa28cd962e538a45ec2aaa84c3d514"
+  integrity sha512-GjRZZlGcGmTh9t+6Xrj5K0YprpoAFCAiCPgmAH9Kb09O4oX6hYuckDfnDipYj+Q7B1GtYWSzDI5HEecNYscLQg==
   dependencies:
     fast-decode-uri-component "^1.0.0"
     safe-regex2 "^2.0.0"
@@ -2495,8 +2495,8 @@ restore-cursor@^3.1.0:
 
 ret@~0.2.0:
   version "0.2.2"
-  resolved "https://registry.npm.taobao.org/ret/download/ret-0.2.2.tgz#b6861782a1f4762dce43402a71eb7a283f44573c"
-  integrity sha1-toYXgqH0di3OQ0Aqcet6KD9EVzw=
+  resolved "https://registry.yarnpkg.com/ret/-/ret-0.2.2.tgz#b6861782a1f4762dce43402a71eb7a283f44573c"
+  integrity sha512-M0b3YWQs7R3Z917WRQy1HHA7Ba7D8hvZg6UE5mLykJxQVE2ju0IXbGlaHPPlkY+WN7wFP+wUMXmBFA0aV6vYGQ==
 
 reusify@^1.0.0, reusify@^1.0.2:
   version "1.0.4"
@@ -2539,8 +2539,8 @@ safe-buffer@~5.2.0:
 
 safe-regex2@^2.0.0:
   version "2.0.0"
-  resolved "https://registry.npm.taobao.org/safe-regex2/download/safe-regex2-2.0.0.tgz#b287524c397c7a2994470367e0185e1916b1f5b9"
-  integrity sha1-sodSTDl8eimURwNn4BheGRax9bk=
+  resolved "https://registry.yarnpkg.com/safe-regex2/-/safe-regex2-2.0.0.tgz#b287524c397c7a2994470367e0185e1916b1f5b9"
+  integrity sha512-PaUSFsUaNNuKwkBijoAPHAK6/eM6VirvyPWlZ7BAQy4D+hCvh4B6lIG+nPdhbFfIbP+gTGBcrdsOaUs0F+ZBOQ==
   dependencies:
     ret "~0.2.0"
 
@@ -2563,8 +2563,8 @@ semver-diff@^3.1.1:
 
 semver-store@^0.3.0:
   version "0.3.0"
-  resolved "https://registry.npm.taobao.org/semver-store/download/semver-store-0.3.0.tgz#ce602ff07df37080ec9f4fb40b29576547befbe9"
-  integrity sha1-zmAv8H3zcIDsn0+0CylXZUe+++k=
+  resolved "https://registry.yarnpkg.com/semver-store/-/semver-store-0.3.0.tgz#ce602ff07df37080ec9f4fb40b29576547befbe9"
+  integrity sha512-TcZvGMMy9vodEFSse30lWinkj+JgOBvPn8wRItpQRSayhc+4ssDs335uklkfvQQJgL/WvmHLVj4Ycv2s7QCQMg==
 
 "semver@2 || 3 || 4 || 5", semver@^5.3.0, semver@^5.4.1, semver@^5.5.1:
   version "5.7.1"
@@ -2634,18 +2634,10 @@ sonic-boom@^0.7.5:
   dependencies:
     flatstr "^1.0.12"
 
-source-map-support@^0.5.16:
+source-map-support@^0.5.16, source-map-support@^0.5.6:
   version "0.5.16"
   resolved "https://registry.yarnpkg.com/source-map-support/-/source-map-support-0.5.16.tgz#0ae069e7fe3ba7538c64c98515e35339eac5a042"
   integrity sha512-efyLRJDr68D9hBBNIPWFjhpFzURh+KJykQwvMyW5UiZzYwoF6l4YMMDIJJEyFWxWCqfyxLzz6tSfUFR+kXXsVQ==
-  dependencies:
-    buffer-from "^1.0.0"
-    source-map "^0.6.0"
-
-source-map-support@^0.5.6:
-  version "0.5.16"
-  resolved "https://registry.npm.taobao.org/source-map-support/download/source-map-support-0.5.16.tgz#0ae069e7fe3ba7538c64c98515e35339eac5a042"
-  integrity sha1-CuBp5/47p1OMZMmFFeNTOerFoEI=
   dependencies:
     buffer-from "^1.0.0"
     source-map "^0.6.0"
